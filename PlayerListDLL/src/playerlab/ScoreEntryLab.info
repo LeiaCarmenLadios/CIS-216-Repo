@@ -1,0 +1,18 @@
+ /**************************************************************************
+     *                                                                        *
+     *  NAME:  Leia Ladios                         CLASS:  CSC121-W01         *
+     *                                                                        *
+     *  Assignment: Lab P-3.38                     Level:   4                 *             
+     *                                                                        *
+     *  Description:                                                          *
+     *                                                                        *
+        P-3.38: Maintains top ten scores of a game application. Implements 
+        add and remove methods of Section 3.1.1
+  		using a doubly linked list instead of a singly linked list.
+	 
+     *                                                                        *
+    **************************************************************************/
+
+
+
+1
