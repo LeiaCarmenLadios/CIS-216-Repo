@@ -1,0 +1,118 @@
+Size of Array: 200
+Time to accomplish sort: 1 milliseconds
+Reference Func Value: 1000
+Ratio (Reference function:Elapsed time): 0.001
+
+
+Size of Array: 400
+Time to accomplish sort: 0 milliseconds
+Reference Func Value: 2000
+Ratio (Reference function:Elapsed time): 0.0
+
+
+Size of Array: 800
+Time to accomplish sort: 1 milliseconds
+Reference Func Value: 4800
+Ratio (Reference function:Elapsed time): 2.0833333333333335E-4
+
+
+Size of Array: 1600
+Time to accomplish sort: 1 milliseconds
+Reference Func Value: 11200
+Ratio (Reference function:Elapsed time): 8.928571428571429E-5
+
+
+Size of Array: 3200
+Time to accomplish sort: 2 milliseconds
+Reference Func Value: 25600
+Ratio (Reference function:Elapsed time): 7.8125E-5
+
+
+Size of Array: 6400
+Time to accomplish sort: 1 milliseconds
+Reference Func Value: 51200
+Ratio (Reference function:Elapsed time): 1.953125E-5
+
+
+Size of Array: 12800
+Time to accomplish sort: 2 milliseconds
+Reference Func Value: 115200
+Ratio (Reference function:Elapsed time): 1.736111111111111E-5
+
+
+Size of Array: 25600
+Time to accomplish sort: 4 milliseconds
+Reference Func Value: 256000
+Ratio (Reference function:Elapsed time): 1.5625E-5
+
+
+Size of Array: 51200
+Time to accomplish sort: 8 milliseconds
+Reference Func Value: 512000
+Ratio (Reference function:Elapsed time): 1.5625E-5
+
+
+Size of Array: 102400
+Time to accomplish sort: 15 milliseconds
+Reference Func Value: 1126400
+Ratio (Reference function:Elapsed time): 1.3316761363636363E-5
+
+
+Size of Array: 204800
+Time to accomplish sort: 41 milliseconds
+Reference Func Value: 2457600
+Ratio (Reference function:Elapsed time): 1.6682942708333332E-5
+
+
+Size of Array: 409600
+Time to accomplish sort: 77 milliseconds
+Reference Func Value: 4915200
+Ratio (Reference function:Elapsed time): 1.5665690104166666E-5
+
+
+Size of Array: 819200
+Time to accomplish sort: 66 milliseconds
+Reference Func Value: 10649600
+Ratio (Reference function:Elapsed time): 6.197415865384615E-6
+
+
+Size of Array: 1638400
+Time to accomplish sort: 142 milliseconds
+Reference Func Value: 22937600
+Ratio (Reference function:Elapsed time): 6.1907087053571425E-6
+
+
+Size of Array: 3276800
+Time to accomplish sort: 295 milliseconds
+Reference Func Value: 49152000
+Ratio (Reference function:Elapsed time): 6.001790364583333E-6
+
+
+Size of Array: 6553600
+Time to accomplish sort: 576 milliseconds
+Reference Func Value: 98304000
+Ratio (Reference function:Elapsed time): 5.859375E-6
+
+
+Size of Array: 13107200
+Time to accomplish sort: 1125 milliseconds
+Reference Func Value: 209715200
+Ratio (Reference function:Elapsed time): 5.364418029785156E-6
+
+
+Size of Array: 26214400
+Time to accomplish sort: 2359 milliseconds
+Reference Func Value: 445644800
+Ratio (Reference function:Elapsed time): 5.293453440946691E-6
+
+
+Size of Array: 52428800
+Time to accomplish sort: 4877 milliseconds
+Reference Func Value: 891289600
+Ratio (Reference function:Elapsed time): 5.47184663660386E-6
+
+
+Size of Array: 104857600
+Time to accomplish sort: 10221 milliseconds
+Reference Func Value: 1887436800
+Ratio (Reference function:Elapsed time): 5.41528065999349E-6

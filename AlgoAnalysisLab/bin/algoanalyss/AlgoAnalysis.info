@@ -1,0 +1,21 @@
+ /**************************************************************************
+     *                                                                        *
+     *  NAME:  Leia Ladios                         CLASS:  CSC121-W01         *
+     *                                                                        *
+     *  Assignment: Lab P-4.62                     Level:   2                 *             
+     *                                                                        *
+     *  Description:                                                          *
+     *                                                                        *
+        P-4.62: Perform an experimental analysis to test the hypothesis that
+        Java's array sort method runs on O(nlogn) time on average. 
+        
+        Answer based on analysis:
+        The Array.sort has a runtime that's less than or equal to
+        the growth of the  reference function nlogn. We could say 
+        that the .sort method has a runtime that's O(nlog(n)) as n reaches 
+        infinity.
+     *                                                                        *
+    **************************************************************************/
+
+
+
