@@ -47,6 +47,7 @@ public class EditorMain {
 //    			  }
     			  
     			  //add
+    			  System.out.println(list);
     			  for(int i = 0; i < insertLine.length(); i++) {
 	    			  list.addLast(insertLine.charAt(i));
 	    			  //System.out.print(list.last().getElement()); //PRINT
