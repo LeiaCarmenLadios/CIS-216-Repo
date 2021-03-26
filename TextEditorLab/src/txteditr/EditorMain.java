@@ -34,20 +34,12 @@ public class EditorMain {
 	    			  //System.out.print(list.last().getElement()); //PRINT
 	    		  }
 	    		  list.addLast('|'); //cursor;
-	    		  System.out.print("\n" + list);
+	    		  System.out.print(list);
 	    		  System.out.println("\n");
     		  }
     		  else {
     			  
-    			  //remove
-    			  
-//    			  for(int i = list.size(); i > 0; i--) {
-//    				  list.remove(list.first());
-//    				  
-//    			  }
-    			  
     			  //add
-    			  System.out.println(list);
     			  for(int i = 0; i < insertLine.length(); i++) {
 	    			  list.addLast(insertLine.charAt(i));
 	    			  //System.out.print(list.last().getElement()); //PRINT
@@ -59,12 +51,33 @@ public class EditorMain {
     		  }
     	  }
     	  else if(firstChoice == 2) {
+    		  if(list.isEmpty()) {
+    			  System.out.println("\nThere is nothing to remove. Please try again.\n");
+    		  }
+    		  else {
+    			  Position<Character> current = list.last();
+    			  int temp = list.size();
+    			  for(int i = 0; i < temp; i++) {
+    				  list.remove(current);
+    				 // System.out.println(current.getElement());
+    				  current = list.before(current);
+    			  }
+    			  
+    			  System.out.println("\n" + "The line has been removed.");
+    			  System.out.println();
+    			  
+    		  }
     		  
     	  }
     	  else if(firstChoice == 3) {
-    		  System.out.println(list + "\n");
-			 //Move cursor
-    		  list.editLine();
+    		  
+			  if(list.isEmpty()) {
+				  System.out.println("\nThere is nothng to edit. Please try again.\n");
+			  }
+			  else {
+				  System.out.println(list + "\n");
+				  list.editLine();
+			  }
     		  
     	  }
     	  else if(firstChoice == 4) {
@@ -75,7 +88,6 @@ public class EditorMain {
     		  String secondChoice = in.next();
     		  if(secondChoice.toLowerCase().equals("n")) {
     			  done = true;
-    			  
     		  }
     		 
     		  System.out.println("\n");

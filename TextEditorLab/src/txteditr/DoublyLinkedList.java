@@ -296,9 +296,7 @@ public class DoublyLinkedList<T> implements PositionalList<T> {
 		Position<T> current = this.first();
 		
 		while (current != null) {
-			System.out.println(current.getElement());
 			if ((Character) current.getElement() == '|') {
-				
 				cursor = (Node)current;
 				return (Position)cursor;
 			} else {
@@ -317,10 +315,6 @@ public class DoublyLinkedList<T> implements PositionalList<T> {
 		holder.getNext().setPrev(holder.getPrev());
 		trailer.getPrev().setNext(holder);
 		holder.setNext(trailer);
-		holder.setPrev(trailer.getPrev());
-		
-		System.out.println(this);
-		
 	}
 	
 	public void editLine() {
@@ -392,7 +386,6 @@ public class DoublyLinkedList<T> implements PositionalList<T> {
 		    	
 		    	if(this.first() != cursor) {
 		    		this.remove(this.before(cursor));
-		    		
 		    		System.out.println("\n" + this + "\n");
 		    	}
 		    	else {
