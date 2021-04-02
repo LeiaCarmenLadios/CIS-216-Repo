@@ -1,0 +1,21 @@
+ /**************************************************************************
+     *                                                                        *
+     *  NAME:  Leia Ladios                         CLASS:  CSC121-W01         *
+     *                                                                        *
+     *  Assignment: Lab P-7.61                     Level:   3                 *             
+     *                                                                        *
+     *  Description:                                                          *
+     *                                                                        *
+        P-7.61: A simple text editors, which stores and displays a string 
+        of characters using the positional list ADT, together with a cursor
+        object that highlights a position in the string. The editor must 
+        support the following operations: 
+        	left: move cursor left one character
+        	right: move cursor right one character
+        	insert c: Insert the character c just after the cursor
+        	delete: delete the character just after the cursor.
+     *                                                                        *
+    **************************************************************************/
+
+
+
