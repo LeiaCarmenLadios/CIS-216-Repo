@@ -11,33 +11,22 @@ public abstract class AbstractBinaryTree<T> extends AbstractTree<T>
 
 		if(parentIndex == 0)
 			return 0;
-		if(index == left(parentIndex)) {
-			return right(parentIndex);
+		if(index == 2 * (parentIndex) + 1) {
+			return 2 * (parentIndex) + 2;
 		}
 		else
-			return left(parentIndex);
+			return 2 * (parentIndex) + 1;
 	}
 	
-	public int numChildren(Integer index) {
-		Integer count = 0;
-		
-		if(left(index) > index) {
-			count++;
-		}
-		if(right(index) > index) {
-			count++;
-		}
-		
-		return count; 
-	}
 	
-	public Integer[] children(Integer index){
-		Integer[] snapshot = new Integer[2];
-		if(left(index) > index)
-			snapshot[0] = (left(index));
-		if(right(index) > index)
-			snapshot[1] = right(index);
+	public Iterable<T> children(int index){
+		ArrayList<T> snapshot = new ArrayList<T>();
 		
-		return snapshot;
+		
+		snapshot.set(2 * (index) + 1, left(index));
+		
+		snapshot.set(2 * (index) + 1, right(index));
+		
+		return (Iterable<T>) snapshot;
 	}
 }
