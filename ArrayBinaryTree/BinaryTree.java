@@ -4,10 +4,11 @@ import java.util.NoSuchElementException;
 
 public interface BinaryTree<T> extends Tree<T>{
     
-	T left(int index) throws IllegalArgumentException;
-	
-	T right(int index) throws IllegalArgumentException;
-	
+
 	int sibling(int index) throws IllegalArgumentException;
+
+	T right(T element) throws IllegalArgumentException;
+
+	T left(T element) throws IllegalArgumentException;
 	
 }

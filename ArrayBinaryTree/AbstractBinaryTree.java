@@ -19,13 +19,13 @@ public abstract class AbstractBinaryTree<T> extends AbstractTree<T>
 	}
 	
 	
-	public Iterable<T> children(int index){
+	public Iterable<T> children(T element, int index){
 		ArrayList<T> snapshot = new ArrayList<T>();
 		
 		
-		snapshot.set(2 * (index) + 1, left(index));
+		snapshot.set(2 * (index) + 1, left(element));
 		
-		snapshot.set(2 * (index) + 1, right(index));
+		snapshot.set(2 * (index) + 1, right(element));
 		
 		return (Iterable<T>) snapshot;
 	}

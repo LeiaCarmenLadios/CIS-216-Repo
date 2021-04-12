@@ -1,15 +1,16 @@
 package bnrytrarr;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public interface Tree<T> extends Iterable<T> {
+public interface Tree<T> extends Iterable<T>{
 	
 	
 	T root();
 	
 	int parent(int index) throws IllegalArgumentException;
 	
-	Iterable<T> children(int index) throws IllegalArgumentException;
+	Iterable<T> children(T element, int index) throws IllegalArgumentException;
 	
 	int numChildren(int index) throws IllegalArgumentException;
 	
@@ -24,8 +25,8 @@ public interface Tree<T> extends Iterable<T> {
     boolean isEmpty();
     
     Iterator<T> iterator();
-    
-    Iterable<T> positions();
+
+    ArrayList<T> positions();
 	
 	
 }

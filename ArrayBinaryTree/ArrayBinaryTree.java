@@ -9,10 +9,11 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 	private int size = 0;
 	private ArrayList<T> treeArr = (ArrayList<T>) new ArrayList<String>();
 
-	private class ArrayTreeIterator implements Iterator<T> {
-		
+	public class ArrayTreeIterator implements Iterator<T> {
+
 		private int i = 0;
 		private boolean removable = false;
+		private T current;
 
 		@Override
 		public boolean hasNext() {
@@ -21,7 +22,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 		@Override
 		public T next() throws NoSuchElementException {
-			if(i == size)
+			if (i == size)
 				throw new NoSuchElementException();
 			removable = true;
 			return treeArr.get(i++);
@@ -29,78 +30,90 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 		@Override
 		public void remove(T t) throws IllegalStateException {
-			if(!removable)
+			if (!removable)
 				throw new IllegalStateException("There is nothing to remove");
 			treeArr.remove(i - 1);
 			i--;
 			removable = false;
-	
+
 		}
-		
+
 	}
 
 	/**
 	 * constructs empty binary tree
 	 */
 	public ArrayBinaryTree() {
-		
+
 	}
-	
+
+	public ArrayBinaryTree(ArrayList<T> treeArr) {
+		this.treeArr = treeArr;
+	}
+
 	public void addRoot(T element) {
 		root = element;
 		treeArr.add(0, root);
-		size ++;
+		size++;
 	}
-	
+
 	public void addLeft(int index, T element) throws IllegalArgumentException {
 		try {
-			
-			if(left(index) != null) {
-				System.out.println("This index already has a left child. Remove it, or try another index.");
+			if (left(treeArr.get(index)) != null) {
+				System.out.println("Index " + index + " already has a left child. Remove it, or try another index.");
 			}
-		}
-		catch(IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			treeArr.add(2 * (index) + 1, element);
 			size++;
-			
+
 		}
 	}
-	
-	public void addRight(int index, T element) throws IllegalArgumentException{
+
+	public void addRight(int index, T element) throws IllegalArgumentException {
 		try {
-			if(right(index) != null)
-				System.out.println("This index already has a right child. Remove it, or try another index.");
-		}
-		catch(IllegalArgumentException e) {
+			if (right(treeArr.get(index)) != null)
+				System.out.println("Index " + index + " already has a right child. Remove it, or try another index.");
+		} catch (IllegalArgumentException e) {
 			treeArr.add(2 * (index) + 2, element);
 			size++;
 		}
 	}
 
 	@Override
-	public T left(int index) throws IllegalArgumentException {
-		if(this.size() <= 2 *(index) + 1) { // no left children
+	public T left(Object element) throws IllegalArgumentException {
+		int index = 0;
+		for (int i = 0; i < treeArr.size(); i++) {
+			if (treeArr.get(i).equals(element)) {
+				index = i;
+			}
+		}
+		if (this.size() <= 2 * (index) + 1) { // no left children
 			throw new IllegalArgumentException("This index does not have a left child.");
 		}
-		
-		return treeArr.get(2 * (index) + 1); //return left child if it exists.
+
+		return treeArr.get(2 * (index) + 1); // return left child if it exists.
 	}
 
 	@Override
-	public T right(int index) throws IllegalArgumentException {
-		if(this.size() <= 2 * (index) + 2) { // no left children
-			throw new IllegalArgumentException("This index does not have a left child.");
+	public T right(Object element) throws IllegalArgumentException {
+		int index = 0;
+		for (int i = 0; i < treeArr.size(); i++) {
+			if (treeArr.get(i).equals(element)) {
+				index = i;
+			}
 		}
-		return treeArr.get(2 * (index) + 2); //return right child if it exists.
-		
-		
+		if (this.size() <= 2 * (index) + 2) { // no left children
+			throw new IllegalArgumentException("This index does not have a right child.");
+		}
+		return treeArr.get(2 * (index) + 2); // return right child if it exists.
+
 	}
 
 	@Override
 	public Object root() {
-		
-		if(this.isEmpty())
-			return null; 
+
+		if (this.isEmpty())
+			return null;
 		else
 			root = treeArr.get(0);
 		return root;
@@ -108,78 +121,131 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 	@Override
 	public int parent(int index) throws IllegalArgumentException {
-		
-		if(index == 0) {
-			throw new IllegalArgumentException(); 
+
+		if (index == 0) {
+			throw new IllegalArgumentException();
 		}
-		
-		return (index -1) / 2;
-		
-		
+
+		return (index - 1) / 2;
+
 	}
 
 	@Override
-	public Iterable<T> children(int index) throws IllegalArgumentException {
-		
-		if(this.isExternal(index)) {
-			throw new IllegalArgumentException(); 
-		}
-		else {
-		    return this.children(index);
+	public Iterable<T> children(Object element, int index) throws IllegalArgumentException {
+
+		if (this.isExternal(index)) {
+			throw new IllegalArgumentException();
+		} else {
+			return super.children(element, index);
 		}
 	}
 
 	@Override
 	public int numChildren(int index) throws IllegalArgumentException {
-		
+
 		int count = 0;
-		if(isEmpty()) {
+		if (isEmpty()) {
 			throw new IllegalArgumentException();
-		}
-		else {
+		} else {
 			int parentIndex = parent(index);
-			if(2 * (index) + 1 > parentIndex){
+			if (2 * (index) + 1 > parentIndex) {
 				count++;
 			}
-			if(2 * (index) + 2 > parentIndex) {
+			if (2 * (index) + 2 > parentIndex) {
 				count++;
 			}
 			return count;
 		}
-	
-		
+
 	}
 
 	@Override
 	public int size() {
-		 
+
 		return size;
 	}
 
 	@Override
 	public Iterator<T> iterator() {
-		 
-		return this.iterator();
+
+		return new ArrayTreeIterator();
 	}
 
 	@Override
-	public Iterable<T> positions() {
-		//default iteration method
-		return (Iterable<T>) treeArr;
+	public ArrayList<T> positions() {
+		// default iteration method
+		return preOrder();
 	}
 
-//	private Iterable<T> preOrder() {
-//		
-//		return null;
-//	}
-//	
-//	public void preOrderSubtree(int index, ArrayList<T> snap) {
-//		snap.add(treeArr.get(index));
-//		
-//		this.children(index);
-//	}
+	private ArrayList<T> preOrder() {
+		
+		ArrayList<T> preOrderedList = new ArrayList<T>();
+
+		if(!isEmpty())
+			preOrderSubtree((T) root(), preOrderedList);
+
+		
+		return preOrderedList;
+	}
+
+	public void preOrderSubtree(T element, ArrayList<T> snap) {
+
+		if (element == null) {
+			return;
+		}
+		snap.add(element);
+		
+    
+		try {
+        
+		preOrderSubtree(this.left(element), snap);
+		preOrderSubtree(this.right(element), snap);
+		}
+		catch(IllegalArgumentException e) {
+			return;
+		}
+
+	}
 	
-	
-	
+	public ArrayList<T> postOrder(){
+		
+		ArrayList<T> postOrderedList = new ArrayList<T>();
+		
+		if(!isEmpty()) {
+			postOrderSubtree((T) root(), postOrderedList);
+		}
+		return postOrderedList;
+	}
+
+	private void postOrderSubtree(T element, ArrayList<T> snap) {
+		
+		
+	}
+
+	public int depth(int index) {
+		if (treeArr.get(index).equals(root)) {
+			return 0;
+		} else
+			return 1 + depth(parent(index));
+	}
+
+	public String toString() {
+		String ret = "";
+
+		int currLevel = 0;
+		int nextLevel = currLevel++;
+
+		for (int i = 0; i < treeArr.size(); i++) {
+			if (i == 0) {
+				System.out.print("root: ");
+				ret += treeArr.get(0);
+			} else {
+				ret += "\n\nnode " + (i + 1) + ":\t";
+				ret += treeArr.get(i);
+			}
+
+		}
+		return ret;
+	}
 
 }
