@@ -25,6 +25,7 @@ public class BinaryTreeMain {
 		
 		System.out.println(biTree);
 		
+		
 		boolean done = false;
 		
 		Scanner in = new Scanner(System.in);
@@ -42,14 +43,36 @@ public class BinaryTreeMain {
 				ArrayList<String> preOrderedList = biTree.positions();
 				ArrayBinaryTree<String> preOrderTree = new ArrayBinaryTree<String>(preOrderedList);
 				
-				System.out.println(preOrderTree);
+				Iterator it = preOrderTree.iterator();
+				
+				System.out.println();
+				while(it.hasNext()) {	
+					System.out.print(it.next() + "  ");
+				}
 				
 			}
 			else if(firstChoice == 2) {
+				ArrayList<String> postOrderedList = biTree.postOrder();
+				ArrayBinaryTree<String> postOrderTree = new ArrayBinaryTree<String>(postOrderedList);
+				
+				Iterator it = postOrderTree.iterator();
+				
+				System.out.println();
+				while(it.hasNext()) {
+					System.out.print(it.next() + "  ");
+				}
 				
 			}   
 			else if(firstChoice == 3) {
+				ArrayList<String> inOrderList = biTree.inorder();
+				ArrayBinaryTree<String> inOrderTree = new ArrayBinaryTree<String>(inOrderList);
 				
+				Iterator it = inOrderTree.iterator();
+				
+				System.out.println();
+				while(it.hasNext()) {
+					System.out.print(it.next() + "  ");
+				}
 			}
 			else if(firstChoice == 4) {
 				done = true;

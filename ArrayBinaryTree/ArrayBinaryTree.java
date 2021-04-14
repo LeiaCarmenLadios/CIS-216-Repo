@@ -49,6 +49,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 	public ArrayBinaryTree(ArrayList<T> treeArr) {
 		this.treeArr = treeArr;
+		this.size = treeArr.size();
 	}
 
 	public void addRoot(T element) {
@@ -178,13 +179,12 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 	}
 
 	private ArrayList<T> preOrder() {
-		
+
 		ArrayList<T> preOrderedList = new ArrayList<T>();
 
-		if(!isEmpty())
+		if (!isEmpty())
 			preOrderSubtree((T) root(), preOrderedList);
 
-		
 		return preOrderedList;
 	}
 
@@ -194,32 +194,70 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 			return;
 		}
 		snap.add(element);
-		
-    
+
 		try {
-        
-		preOrderSubtree(this.left(element), snap);
-		preOrderSubtree(this.right(element), snap);
+
+			preOrderSubtree(this.left(element), snap);
+			preOrderSubtree(this.right(element), snap);
+		} catch (IllegalArgumentException e) {
+			return;
 		}
-		catch(IllegalArgumentException e) {
+
+	}
+
+	public ArrayList<T> postOrder() {
+
+		ArrayList<T> postOrderedList = new ArrayList<T>();
+
+		if (!isEmpty()) {
+			postOrderSubtree((T) root(), postOrderedList);
+		}
+
+		return postOrderedList;
+	}
+
+	private void postOrderSubtree(T element, ArrayList<T> snap) {
+
+		if (element == null) {
+			return;
+		}
+
+		try {
+			postOrderSubtree(this.left(element), snap);
+			
+			postOrderSubtree(this.right(element), snap);
+			snap.add(element);
+		} catch (IllegalArgumentException e) {
+			snap.add(element);
 			return;
 		}
 
 	}
 	
-	public ArrayList<T> postOrder(){
-		
-		ArrayList<T> postOrderedList = new ArrayList<T>();
+	public ArrayList<T> inorder(){
+		ArrayList<T> inorderList = new ArrayList<T>();
 		
 		if(!isEmpty()) {
-			postOrderSubtree((T) root(), postOrderedList);
+			inorderSubtree((T) root(), inorderList);
 		}
-		return postOrderedList;
+		
+		return inorderList;
 	}
-
-	private void postOrderSubtree(T element, ArrayList<T> snap) {
-		
-		
+	
+	private void inorderSubtree(T element, ArrayList<T> snap) {
+		try {
+			if(this.left(element) != null){
+				inorderSubtree(left(element), snap);
+			}
+			snap.add(element);
+			if(this.right(element) != null) {
+				inorderSubtree(right(element), snap);
+			}
+		}
+		catch(IllegalArgumentException e) {
+			snap.add(element);
+			return;
+		}
 	}
 
 	public int depth(int index) {
@@ -228,6 +266,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 		} else
 			return 1 + depth(parent(index));
 	}
+
 
 	public String toString() {
 		String ret = "";
