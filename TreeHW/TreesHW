@@ -1,0 +1,141 @@
+R-8.1
+The root is /user/rt/courses
+The internal nodes are user/, rt/, courses/, cs016/, 
+homeworks/, programs/,
+cs252/, projects/, papers/, and demos/.
+There are 9 descendants for cs016/.
+There is are 3 ancestors for cs016/.
+The siblings for node homeworks/ are programs/ and grades/.
+The subtree rooted at projects/ includes projects/,
+papers/, demos/, buylow/, sellhigh/, and market/.
+The node papers/ is at depth 4.
+The height of the tree is 6.
+
+R-8.5
+
+We can use the preorder traversal of a tree for this algorithm. 
+The recursive traversal is able to visit each node so that
+each parent node is visited before its children. 
+We are able to determine if there is a left child using the left(p)
+method. If that method returns null, we will go on to check that
+the left child does not have any children. We can use numChildren(p)
+to see if the left child has any children nodes of its own. If not, 
+it is considered an external node, or a leaf. If it does not have
+children of its own, we can increment a counter. 
+Since we are dealing with a Binary Tree, we will be able to stop the 
+traversal when we reach a right child in the right subtree which is 
+a leaf. This means there are no more children to check and we   
+have reached the end of the tree. 
+
+R-8.6
+
+A binary tree is considered proper only if its nodes
+have zero or two children.
+An improper tree T would mean that the binary tree 
+is not full and one or a couple of nodes have only one child. 
+Should there be an even number of nodes that have only one child, 
+for every pair of those nodes, one of the children can be replaced 
+to be the sibling of the other child with no sibling. There is no 
+change in tree size so the tree maintains the parameters of O(n) 
+nodes.
+
+To be able to represent an improper binary tree as proper with an 
+odd number of nodes with only one child one must consider 
+creating a tree with size O(n). To create that, we can use
+a new tree with 2n size. This allows us to move the elements from 
+the first tree into a tree that is proper and still maintain 
+the parameter of having O(n) nodes. Say we had a tree with 10 nodes,
+and three of them only had one child making the tree improper. 
+In a tree with 20 nodes, 10 of those could hold the elements
+from the original tree and be instantiated as a proper tree with all
+nodes having zero to two children each node. 
+
+
+R-8.7
+
+In the book, what is mentioned is the relationship
+between internal and external nodes in a proper binary tree.
+Here we will look at the relationship of internal and external
+nodes in a improper binary tree. 
+
+Two cases  can be observed: 
+1) If only one internal node has one child, making
+the tree an improper one, the relationship between the internal 
+and external nodes would be that nE = nI. 
+	Therefore the minimum and maximum of internal nodes are 
+	equal. It would be n/2 internal nodes and n/2 external ones.
+	
+2) If there were more than one internal node with only on
+child, making the tree improper, the relationship would be
+nE = nI - 1. There is always one less external node than 
+there is an internal node. 
+	Therefore the minimum external node there would be for 
+	a tree with nodes n would be (n - 1)/2 
+
+R-8.22
+
+       [E]
+      /   \
+    [X]   [N]
+    / \
+  [A] [U] 
+  / \
+[M]	 [F]
+
+
+R-8.25
+To have the method parenthesize from code Fragment 8.26 
+rely on String class's length() method as well as
+have line breaks to display the tree in a window of 80
+character long, we would have to modify the for loop. 
+We can have a counter to keep track of the length of 
+Strings stored within each position. We would add up the
+lengths and once it hits 80, we can insert a line break, 
+reset the counter back to zero, and start displaying the 
+rest of the parenthesized tree inside an 80 character long
+window. 
+
+C-8.42:
+
+printAndCompute(Position<T> p){
+    System.out.print(p.getElement());
+    int counter = 0; 
+     
+	for(Position<T> pos: children(p)){
+		h = Math.max(h, 1 + heght(pos));
+	}
+	System.out.print("\t" + h + "\n");
+}
+
+children(p) is the number of children 
+position p has.
+
+C-8.46:
+
+The inorder traversal typically already takes O(n) time. 
+However, the method commonly used is recursion to accomplish
+the traversal. 
+Without recursion, we can use a stack to accomplish the same 
+output as the recursive inorder traversal. 
+
+inorderTraversal(){
+	Node r = root;
+	if(root() == null) //the tree is empty
+		return;
+	
+	Stack st = new Stack(); //create stack
+	
+	while(//stack size greater than 0 
+		  or current node is not null)
+	{
+		while(//r not null){
+			st.push();
+			r = r.left();
+		}
+		
+		r = st.pop();
+		r = r.right();
+	}
+
+ 
+
