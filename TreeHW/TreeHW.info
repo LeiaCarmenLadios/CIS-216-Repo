@@ -6,14 +6,29 @@
      *                                                                        *
      *  Description:                                                          *
      *                                                                        *
-        R-8.1:yes
-        R-8.5:yes
-        R-8.6:
-        R-8.7:yes
-        R-8.22:yes
-        R-8.25:yes
-        C-8.42:yes
-        C-8.46:
+        R-8.1:This question refers back to Figure 8.3
+        R-8.5: Describe an algo, relying only on the BinaryTree operations,
+        that counts the number of leaves in a binary tree that are the left
+        child of their respective parent. 
+        R-8.6: Let T be an n-node binary tree that may be improper. 
+        Describe how to represent T by means of a proper binary
+        tree T' with O(n) nodes.
+        R-8.7: What are the maximum and minimum number 
+        of internal and external nodes in an improper 
+        binary tree with n nodes?
+        R-8.22: Draw a binary tree that simultaneously satisfies 
+        the following: 
+           - each internal node of T stores a single character.
+           - Preorder result: EXAMFUN.
+           - Inorder result: MAFXUEN.
+        R-8.25: Describe a modification of the method parenthesize, 
+        from Code Fragment 8.26
+        C-8.42: Give an efficient algo that computes and prints, for 
+        every position p of a tree T, the element of p followed by the
+        height of p's subtree.
+        C-8.46: Describe, in pseudocode, a nonrecursive method 
+        for performing an inorder traversal of a binary tree 
+        in linear time.
      *                                                                        *
     **************************************************************************/
 
