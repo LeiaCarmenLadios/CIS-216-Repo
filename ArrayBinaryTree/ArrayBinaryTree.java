@@ -66,16 +66,23 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 		} catch (IllegalArgumentException e) {
 			treeArr.add(2 * (index) + 1, element);
 			size++;
-
 		}
 	}
 
 	public void addRight(int index, T element) throws IllegalArgumentException {
 		try {
-			if (right(treeArr.get(index)) != null)
+			if(right(treeArr.get(index)) != null)
 				System.out.println("Index " + index + " already has a right child. Remove it, or try another index.");
 		} catch (IllegalArgumentException e) {
-			treeArr.add(2 * (index) + 2, element);
+			try {
+				if(left(treeArr.get(index)) != null)
+					treeArr.add(2 * (index) + 2, element);
+			}
+			catch(IllegalArgumentException eTwo) {
+				treeArr.add(2 * (index) + 1, (T)new String(""));
+				treeArr.add(2 * (index) + 2, element);
+				
+			}
 			size++;
 		}
 	}
@@ -103,7 +110,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 				index = i;
 			}
 		}
-		if (this.size() <= 2 * (index) + 2) { // no left children
+		if (treeArr.size() <= (2 * (index) + 2)) { // no right children
 			throw new IllegalArgumentException("This index does not have a right child.");
 		}
 		return treeArr.get(2 * (index) + 2); // return right child if it exists.
@@ -182,24 +189,26 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 		ArrayList<T> preOrderedList = new ArrayList<T>();
 
-		if (!isEmpty())
+		if(!isEmpty())
 			preOrderSubtree((T) root(), preOrderedList);
 
 		return preOrderedList;
 	}
 
 	public void preOrderSubtree(T element, ArrayList<T> snap) {
-
+   
+		
 		if (element == null) {
 			return;
 		}
+		
 		snap.add(element);
-
+		
 		try {
-
 			preOrderSubtree(this.left(element), snap);
 			preOrderSubtree(this.right(element), snap);
-		} catch (IllegalArgumentException e) {
+		} 
+		catch (IllegalArgumentException e) {
 			return;
 		}
 
@@ -279,8 +288,11 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 				System.out.print("root: ");
 				ret += treeArr.get(0);
 			} else {
-				ret += "\n\nnode " + (i + 1) + ":\t";
-				ret += treeArr.get(i);
+				
+				if(treeArr.get(i).equals("") == false) {
+					ret += "\n\nnode " + (i + 1) + ":\t";
+					ret += treeArr.get(i);
+				}
 			}
 
 		}

@@ -18,7 +18,7 @@ public class BinaryTreeMain {
 		
 		biTree.addRight(1, new String("8"));
 		
-		biTree.addLeft(2, new String("9"));
+//		biTree.addLeft(2, new String("9"));
 		
 		biTree.addRight(2, new String("10"));
 		
@@ -47,7 +47,9 @@ public class BinaryTreeMain {
 				
 				System.out.println();
 				while(it.hasNext()) {	
-					System.out.print(it.next() + "  ");
+					Object holder = it.next();
+					if(holder.equals("") == false)
+						System.out.print(holder + "  ");
 				}
 				
 			}
@@ -59,7 +61,9 @@ public class BinaryTreeMain {
 				
 				System.out.println();
 				while(it.hasNext()) {
-					System.out.print(it.next() + "  ");
+					Object holder = it.next();
+					if(holder.equals("") == false)
+						System.out.print(holder + "  ");
 				}
 				
 			}   
@@ -71,7 +75,9 @@ public class BinaryTreeMain {
 				
 				System.out.println();
 				while(it.hasNext()) {
-					System.out.print(it.next() + "  ");
+					Object holder = it.next();
+					if(holder.equals("") == false)
+						System.out.print(holder + "  ");
 				}
 			}
 			else if(firstChoice == 4) {
