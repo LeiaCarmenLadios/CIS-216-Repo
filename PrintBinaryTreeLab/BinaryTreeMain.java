@@ -6,78 +6,51 @@ import java.util.Scanner;
 public class BinaryTreeMain {
 
 	public static void main(String[] args) {
+		ArrayBinaryTree<String> biTree = new ArrayBinaryTree<String>();
+		
+		biTree.addRoot(new String ("4"));
+		
+		biTree.addLeft(0, new String("5"));
+	    
+		biTree.addRight(0, new String("6"));
+		
+		biTree.addLeft(1, new String("7"));
+		
+		biTree.addRight(1, new String("8"));
+		
+//		biTree.addLeft(2, new String("9"));
+		
+		biTree.addRight(2, new String("10"));
+		
+		
+		System.out.println(biTree);
 		
 		
 		boolean done = false;
 		
+		Scanner in = new Scanner(System.in);
 		while(!done) {
-			Scanner in = new Scanner(System.in);
-			System.out.println("What would you like to do?");
-			System.out.println("1) Start a tree");
+			
+			System.out.println("\nWhat kind of traversal would you like to do?");
+			System.out.println("1) Print Tree");
 			System.out.println("2) Exit");
 			
 			int firstChoice = in.nextInt();
 			
-			
-			
-			if (firstChoice == 1) {
-				ArrayBinaryTree<Integer> biTree = new ArrayBinaryTree<Integer>();
-				System.out.print("First, enter a number that will be the root: ");
-				biTree.addRoot(in.nextInt());
+			if(firstChoice == 1) {
 				
 				
-				
-				boolean doneTwo = false;
-				while(!doneTwo) {
-					
-					System.out.println();
-					System.out.println("What would you like to do next?");
-					
-					System.out.println("1) Add left node");
-					System.out.println("2) Add right node");
-					System.out.println("3) Print tree");
-					System.out.println("4) Exit");
-					
-					int choiceTwo = in.nextInt();
-					
-					if(choiceTwo == 1) {
-						System.out.println();
-						System.out.print("Enter a number for the left node: ");
-						int entry = in.nextInt();
-						
-						if(biTree.size() == 1) {
-							biTree.addLeft(biTree.root(), entry);
-						}
-						else {
-							System.out.println();
-							System.out.print("Which element should it be attached to? ");
-							int attachTo = in.nextInt();
-							biTree.addLeft(attachTo, entry);
-						}
-					    
-					}
-					else if(choiceTwo == 2) {
-						
-					}
-					else if(choiceTwo == 3) {
-						
-					}
-					else if(choiceTwo == 4) {
-						
-					}
-					else {
-						doneTwo = true;
-					}
-				}
 			}
-			else if (firstChoice == 2) {
+			else if(firstChoice == 2) {
 				done = true;
 			}
 			else {
 				System.out.println("Invalid choice. Please try again.");
 			}
-
+			
 		}
+		
+		
 	}
 }
  

@@ -7,7 +7,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 
 	private T root = null;
 	private int size = 0;
-	private ArrayList<T> treeArr = (ArrayList<T>) new ArrayList<Integer>();
+	private ArrayList<T> treeArr = (ArrayList<T>) new ArrayList<String>();
 
 	public class ArrayTreeIterator implements Iterator<T> {
 
@@ -58,34 +58,21 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 		size++;
 	}
 
-	public void addLeft(T attachTo, T element) throws IllegalArgumentException {
-		
-		int index = 0;
-		
-		for(int i = 0; i < treeArr.size(); i++) {
-			if(treeArr.get(i) == attachTo) {
-				index = i;
-				
-			}
-		}
+	public void addLeft(int index, T element) throws IllegalArgumentException {
 		try {
 			if (left(treeArr.get(index)) != null) {
-				System.out.println("Index " + index 
-					+ " already has a left child. Remove it, or try another index.");
+				System.out.println("Index " + index + " already has a left child. Remove it, or try another index.");
 			}
 		} catch (IllegalArgumentException e) {
-			//treeArr.add(2 * (index) + 1, element);
+			treeArr.add(2 * (index) + 1, element);
 			size++;
 		}
-		
-		System.out.println(size());
 	}
 
 	public void addRight(int index, T element) throws IllegalArgumentException {
 		try {
 			if(right(treeArr.get(index)) != null)
-				System.out.println("Index " + index 
-					+ " already has a right child. Remove it, or try another index.");
+				System.out.println("Index " + index + " already has a right child. Remove it, or try another index.");
 		} catch (IllegalArgumentException e) {
 			try {
 				if(left(treeArr.get(index)) != null)
@@ -131,7 +118,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 	}
 
 	@Override
-	public T root() {
+	public Object root() {
 
 		if (this.isEmpty())
 			return null;
@@ -152,8 +139,7 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 	}
 
 	@Override
-	public Iterable<T> children(Object element, int index) 
-			throws IllegalArgumentException {
+	public Iterable<T> children(Object element, int index) throws IllegalArgumentException {
 
 		if (this.isExternal(index)) {
 			throw new IllegalArgumentException();
@@ -284,33 +270,30 @@ public class ArrayBinaryTree<T> extends AbstractBinaryTree {
 	}
 
 	public int depth(int index) {
+		
 		if (treeArr.get(index).equals(root)) {
 			return 0;
-		} else
+		} 
+		else
 			return 1 + depth(parent(index));
 	}
 
 
 	public String toString() {
 		String ret = "";
+		
+		return this.recursePrint(0);
+		
+	}
 
-		int currLevel = 0;
-		int nextLevel = currLevel++;
-
-		for (int i = 0; i < treeArr.size(); i++) {
-			if (i == 0) {
-				System.out.print("root: ");
-				ret += treeArr.get(0);
-			} else {
-				
-				if(treeArr.get(i).equals("") == false) {
-					ret += "\n\nnode " + (i + 1) + ":\t";
-					ret += treeArr.get(i);
-				}
-			}
-
+	private String recursePrint(int i) {
+		if(root == null) {
+			return null;
 		}
-		return ret;
+		
+		
+		return "";
+		
 	}
 
 }
