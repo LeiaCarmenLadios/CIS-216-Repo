@@ -1,0 +1,136 @@
+R-14.1
+
+Here, the X is supposed to be two edges connecting
+the vertices diagonally from each other. With three 
+connected components, 12 vertices and 18 edges, 
+we are able to create the following graph:
+
+O - O 
+| X |
+O - O   
+
+O - O 
+| X |
+O - O
+
+O - O 
+| X |
+O - O
+
+R- 14.2
+
+For a simple and undirected graph, given vertices v and 
+connected components k, the maximum number of edges 
+would be e <= ((v−k+1)*(v−k))/2.
+Hence for this problem, the maximum number of edges
+for the given situation would be 
+((12-3+1)*(12-3))/2 = 45.
+
+
+R-14.3:
+
+            	     0  1  2  3  4  5  6  7  8
+                
+Snoeyink -> q ->  0           a
+
+Garg     -> r ->  1           b        g
+
+Goldwasser-> s -> 2           c        h
+
+Goodrich -> t ->  3  a  b  c        e  d     f           
+
+Tollis   -> u ->  4                 j  i
+
+Vitter   -> v ->  5           e        k  l
+ 
+Tamassia -> w ->  6     g  h  d  i  k     m  o
+
+Preparata -> x -> 7                 l  m     n
+
+Chiang    -> y -> 8           f        o   n
+        
+        
+R-14.4:
+
+             
+                
+Snoeyink -> q -> a
+
+Garg -> r -> b  g
+
+Goldwasser -> s -> c  h
+
+Goodrich -> t -> a  b  c  e  d  f           
+
+Tollis -> u -> j  i
+
+Vitter -> v -> e  k  l
+ 
+Tamassia -> w -> g  h  d  i  k  m  o
+
+Preparata -> x -> l  m  n
+
+Chiang -> y -> f  o   n
+        
+
+R-14.5:
+
+PDF drawing submitted
+
+R-14.6
+
+Insertion of an edge or vertex takes constant time with
+the help of the Positional list ADT that we discussed earlier
+in the class. Should you need to insert a vertex or edge, 
+one can create either an Edge or Vertex instance and store it
+in the positional list. The position can then be used later for
+access or updates. There does not need to be any traversals or 
+shifts to make the insert happen.
+
+The reason it takes O(m), where m is the number of edges
+leading to the vertex, time to remove a vertex is because every 
+edge pointing to it has to be deleted as well. 
+        
+ 
+C-14.44:
+The path to the end of the maze can be found using the Shortest Path
+algorithm called Dijkstra's algorithm. When the maze is converted
+into a graph representation, the output is a graph of all the open
+paths in the maze. A vertex and two edges are made to connect the
+path together. The second edge allows the user to be able to traverse 
+back through the maze. 
+
+The Dijsktra algorithm will do a breadth-first traversal of the 
+tree and determine the singular path to the end vertex on the maze. 
+As the traversal goes on, the algorithm keeps track of the vertices
+that make up the shortest path through the use of an array(referring
+to other data structures aside from the regular array). Since there
+is only one path that will ultimately lead to the end vertex, the shortest 
+path is the same as the solution path. 
+
+The runtimes for this algorithm will differ depending on the data 
+structure supporting it. If we choose the heap implementation,
+we would be left with O((n+m)log n) for run time. However, if 
+we use the unsorted sequence implementation, we can achieve 
+a run time of O(n^2). Each version is beneficial depending on 
+the size of the maze we are trying to solve. 
+
+        
+C-14.41:
+
+An O(n+m) traversal runtime can be achieved with the depth first 
+traversal algorithm. This method is only called once for each vertex.
+The depth first traversal utilizes two data structures to mark the 
+visited vertices and the edges that lead the traversal to that vertex.
+To ensure that the edge is only traversed once, we can check that if
+the data structure has already been marked up to twice for a tree edge
+and once for a non tree edge. 
+This means that the data structure has discovered one or both of 
+the vertices on either end of the edge. This indicates that an edge
+has been processed/discovered and the traversal no longer need to worry about 
+getting to it.
+
+        
+C-14.38:
+        
+C-14.55:
