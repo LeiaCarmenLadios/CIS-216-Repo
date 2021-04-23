@@ -22,24 +22,32 @@ public abstract class AbstractPQ<J, T>
 			// TODO Auto-generated method stub
 			return value;
 		}
+		
+		private void setKey(J key) {
+			this.key = key;
+		}
+		
+		private void setValue(T value) {
+			this.value = value;
+		}
 
 	}
 
 	private PQComparator<J> comp;
 
-	private AbstractPQ(PQComparator<J> comp) {
+	protected AbstractPQ(PQComparator<J> comp) {
 		this.comp = comp;
 	}
 
-	private AbstractPQ() {
+	protected AbstractPQ() {
 		this(new PQComparator<J>());
 	}
 
-	private int compare(Entry<J, T> one, Entry<J, T> two) {
+	protected int compare(Entry<J, T> one, Entry<J, T> two) {
 		return comp.compare(one.getKey(), two.getKey());
 	}
 
-	private boolean checkKey(J key) throws IllegalArgumentException {
+	protected boolean checkKey(J key) throws IllegalArgumentException {
 		try {
 			return comp.compare(key, key) == 0;
 		} catch (Exception e) {
