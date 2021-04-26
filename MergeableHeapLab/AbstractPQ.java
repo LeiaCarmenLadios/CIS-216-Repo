@@ -2,7 +2,7 @@
 public abstract class AbstractPQ<J, T> 
 					implements PriorityQueue<J,T>{
 
-	private static class PQEntry<J, T> implements Entry<J, T> {
+	protected static class PQEntry<J, T> implements Entry<J, T> {
 		private J key;
 		private T value;
 
@@ -23,11 +23,11 @@ public abstract class AbstractPQ<J, T>
 			return value;
 		}
 		
-		private void setKey(J key) {
+		protected void setKey(J key) {
 			this.key = key;
 		}
 		
-		private void setValue(T value) {
+		protected void setValue(T value) {
 			this.value = value;
 		}
 
