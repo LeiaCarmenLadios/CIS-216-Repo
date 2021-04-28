@@ -1,8 +1,8 @@
-import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public abstract class AbstractMap<K, V> implements Map<K, V> {
 	
-	public boolean isEmptyy() {
+	public boolean isEmpty() {
 		return size() == 0;
 	}
 	
@@ -40,7 +40,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 	
 	private class KeyIterator implements Iterator<K>{
 		
-		private Iterator<Entry<K, V>> entryList = entrySet().iterator();
+		private Iterator<Entry<K, V>> entryList = (Iterator<Entry<K, V>>) entrySet().iterator();
 
 		@Override
 		public boolean hasNext() {
@@ -49,10 +49,19 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 		}
 
 		@Override
-		public K next() {
+		public K next() throws NoSuchElementException {
 			// TODO Auto-generated method stub
 			return entryList.next().getKey();
 		}
+
+		@Override
+		public void remove(Position<K> t) throws UnsupportedOperationException {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("This is not supported.");
+			
+		}
+
+
 		
 	}
 	
@@ -63,7 +72,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 			// TODO Auto-generated method stub
 			return new KeyIterator();
 		}
-		
+
 		
 	}
 	
@@ -72,7 +81,7 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 	}
 	
 	private class ValIterator implements Iterator<V>{
-		private Iterator<Entry<K, V>> entryList = entrySet().iterator();
+		private Iterator<Entry<K, V>> entryList = (Iterator<Entry<K, V>>) entrySet().iterator();
 		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
@@ -83,6 +92,12 @@ public abstract class AbstractMap<K, V> implements Map<K, V> {
 		public V next() {
 			// TODO Auto-generated method stub
 			return entryList.next().getValue();
+		}
+
+		@Override
+		public void remove(Position<V> t) throws UnsupportedOperationException {
+			// TODO Auto-generated method stub
+			throw new UnsupportedOperationException("This is not supported");
 		}
 		
 	}
