@@ -70,6 +70,51 @@ public class TreeMap<K, V> extends AbstractSortedMap<K,V> {
         return tree.sibling(p);
     }
    
+    protected boolean isRoot(Position<Entry<K, V>> p) {
+        return tree.isRoot(p);
+    }
+
+    protected boolean isExternal(Position<Entry<K, V>> p) {
+        return tree.isExternal(p);
+    }
+
+    protected boolean isInternal(Position<Entry<K, V>> p) {
+        return tree.isInternal(p);
+    }
+    protected void set(Position<Entry<K, V>> p, Entry<K, V> e) {
+        tree.set(p, e);
+    }
+
+    private Position<Entry<K, V>> treeSearch(Position<Entry<K, V>> p, K key) {
+        if (isExternal(p)) {
+            return p;                          
+        }
+        int comp = compare(key, p.getElement());
+        if (comp == 0) {
+            return p;                        
+        } else if (comp < 0) {
+            return treeSearch(left(p), key);  
+        } else {
+            return treeSearch(right(p), key);  
+        }
+    }
+    
+    protected Position<Entry<K, V>> treeMax(Position<Entry<K, V>> p) {
+        Position<Entry<K, V>> walk = p;
+        while (isInternal(walk)) {
+            walk = right(walk);
+        }
+        return parent(walk);              
+    }
+
+    
+    protected Position<Entry<K, V>> treeMin(Position<Entry<K, V>> p) {
+        Position<Entry<K, V>> walk = p;
+        while (isInternal(walk)) {
+            walk = left(walk);
+        }
+        return parent(walk);           
+    }
     
 	@Override
 	public Entry<K, V> firstEntry() {
@@ -122,7 +167,13 @@ public class TreeMap<K, V> extends AbstractSortedMap<K,V> {
 	@Override
 	public V get(K key) {
 		// TODO Auto-generated method stub
-		return null;
+		 checkKey(key);                          // may throw IllegalArgumentException
+	        Position<Entry<K, V>> p = treeSearch(root(), key);
+	        rebalanceAccess(p);                     // hook for balanced tree subclasses
+	        if (isExternal(p)) {
+	            return null;         // unsuccessful search
+	        }
+	        return p.getElement().getValue();       // match found
 	}
 
 	@Override
@@ -143,6 +194,9 @@ public class TreeMap<K, V> extends AbstractSortedMap<K,V> {
 		return null;
 	}
 
+	protected void rebalanceAccess(Position<Entry<K, V>> p) {
+    }
+	
 	@Override
 	public Iterable<Entry<K, V>> entrySet() {
 		// TODO Auto-generated method stub
