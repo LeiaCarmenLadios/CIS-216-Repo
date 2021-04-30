@@ -1,0 +1,107 @@
+R-12.12
+Quick sort uses the divide and conquer paradigm
+to go about it's sorting process. With that, 
+the best case for an array to be quick sorted would
+be if the divided arrays after the pivot is determined 
+are perfectly balanced and as even as possible. 
+We must also make sure that we choose an optimal pivot 
+to be able to achieve the best-case O(nlogn) performance.
+After a pivot is chosen, we are left with sub arrays
+to then sort through. Each time, we divide the set by 2.
+Given a list of n items, we first have n/2, then n/4 
+items in the next division, then n/8 until we achieve 
+a sub array that's small enough to quickly sort through. 
+
+
+
+R-12.16
+In a comparison-based algorithm for sorting n number of 
+elements is O(nlogn) in a worst case scenario. The height 
+of the decision tree representing the different comparisons
+has to either be equal or less than the running time of the 
+sorting algorithm. With n! number of elements, n number of 
+comparisons would not be enough as each element should have 
+at least one permutation through the decision tree to make 
+all the necessary comparisons. Say we have 5! elements. That's
+1 * 2 * 3 * 4 * 5 elements and we would only have  5 comparisons. 
+That would not be enough to get through all of the elements 
+presented within the decision tree. It would only make it
+to depth of two before running out of comparisons.
+
+R-12.17
+To sort the first k elements, we would need to consider 
+the comparisons that need to happen before for the first
+input sequence of size k to be completely sorted in just O(n)
+time. We can look back at a decision tree representation
+of the first k elements to see the biggest that k can be. In
+a proposition in the book, it states that "the running time
+of a comparison-based sorting algorithm must be greater than or 
+equal to the height of the decision tree T associated with this
+algorithm" (557). By that same proposition, we also know that each
+input, or node, is associated with at least one of the permutations
+counted in the running time. We know that with a running time
+of O(n) then that the biggest that k can be is n/2. 
+
+R-12.18
+In-place means that the sorting algorithm only occupies the same
+storage as the original input sequence. There is an auxiliary 
+structure called the "bucket" which is also a sequence of entries. 
+After everything is sorted into the bucket, it is then put back into
+the original structure. This means that bucket-sort uses additional 
+memory than the original input array. At worst, the secondary bucket
+structure could be as big as the original data structure. 
+
+C-12.28:
+
+boolean isSorted (T[] outputS, int a){
+	
+	if(outputS.size() - 1 < a){
+		return true;
+	}
+	boolean nextInputCheck = isSorted(outputS, a + 1);
+	if(outputS[a + 1] > outputS[a] && nextInputCheck){
+		return true;
+	}
+	
+	return false;
+}
+
+It is not efficient as each element has to be compared
+to ensure that the correct sorting convention is followed. 
+The number of comparisons affect the running time of the 
+algorithm. If one is able to add an element at the end or 
+beginning of the array, it would be great to know to check 
+the beginning or the back of the array first so that should 
+the isSorted method return a false, it would do so faster and 
+with less wasted comparisons and running time. 
+
+C-12.47:
+For an efficient means of finding the set of elements that are
+in A or B, but not both, it would increase efficiency knowing 
+how each sorted sequence is sorted. If they are both in increasing order,
+that would be best. If one is in increasing order and the other is 
+in decreasing order, we can start from the front of one sequence and 
+at the end of the other sequence. Say we pick A, with every element, 
+we will compare it to each element in B. If we find that it does in fact
+exist in B, we skip it and move to the next one. Here we only have to 
+iterate until the end of one sequence. It would also help to pick the 
+sequence that is shorter so that there are less comparisons.
+
+C-12.26:
+Removing duplicates from a collection is easier done with a 
+sorted collection as the elements with the same values are right 
+next to each other. We will use a auxiliary data structure as well
+to avoid shifting the left over elements which would take a
+significant amount of running time.
+We can have a variable hold the current element and move that element 
+to the auxiliary data structure. 
+We then see how far, index wise, their duplicates span until. 
+We can utilize a counter for this. 
+Once the holder variable for the current element is moved to the auxiliary 
+data structure, we can update it to be the element at index 
+holderIndex + counter + 1. This is the next element we will be evaluating 
+for duplicates. 
+
+This method has a running time of O(n) with n number of elements as 
+each element must be visited, but the move to the new data structure
+takes O(1) time. We also avoided the shifting of the elements. 
