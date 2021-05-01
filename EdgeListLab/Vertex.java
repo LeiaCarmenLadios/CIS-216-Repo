@@ -1,4 +1,4 @@
 
 public interface Vertex<V>{
-	V element();
+	V getElement();
 }

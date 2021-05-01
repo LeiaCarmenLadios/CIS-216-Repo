@@ -11,7 +11,7 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 			this.element = element;
 		}
 		@Override
-		public V element() {
+		public V getElement() {
 			// TODO Auto-generated method stub
 			return element;
 		}
@@ -26,7 +26,7 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		}
 		
 		@Override
-		public E element() {
+		public E getElement() {
 			// TODO Auto-generated method stub
 			return element;
 		}
@@ -35,14 +35,16 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 	
 	private Integer[][] adjMat;
 	
-	private AdjacencyMatrixGraph(InVertex<V>[] vertices, InVertex<V>[][] vertexPairs) {
+	public AdjacencyMatrixGraph(V[] vertices, V[][] vertexPairs) {
 		
 		adjMat = new Integer[vertices.length][vertices.length];
 		
 		for(int i = 0; i < vertices.length; i++) {
 			for(int j = 0; j < vertexPairs[0].length; j++) {
-				if(vertices[i] == vertexPairs[j][0]) {
+				if(vertices[i] == vertexPairs[j][0] ) {
 					adjMat[i][j] = 1;
+					System.out.print(vertices[i] + " " + vertexPairs[j][0] + " ");
+					System.out.print(adjMat[i][j] + " \n");
 				}
 			}
 		}
