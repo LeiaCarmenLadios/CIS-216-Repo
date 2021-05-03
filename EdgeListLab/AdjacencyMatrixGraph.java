@@ -6,9 +6,19 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 	private class InVertex<V> implements Vertex<V>{
 		
 		private V element;
+		private int index;
 		
 		public InVertex(V element) {
+		
 			this.element = element;
+		}
+		
+		public int getIndex() {
+			return this.index;
+		}
+		
+		public void setIndex(int index) {
+			this.index = index;
 		}
 		@Override
 		public V getElement() {
@@ -48,27 +58,39 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		
 	} //end of nested InVertex class
 	
-	private Integer[][] adjMat;
+	private int[][] adjMat;
 	private InVertex<V>[] vertices;
 	private InEdge<E>[] edges;
 	
 	public AdjacencyMatrixGraph(V[] vertices, V[][] vertexPairs) {
 		this.vertices = new InVertex[vertices.length];
 		this.edges = new InEdge[vertexPairs.length];
-		adjMat = new Integer[vertices.length][vertices.length];
+		adjMat = new int[vertices.length][vertices.length];
 		for(int i = 0; i < vertices.length; i++) {
 			InVertex<V> vert = new InVertex<V>(vertices[i]);
+			vert.setIndex(i);
 			this.vertices[i] = vert;
 			
 			System.out.println(this.vertices[i].getElement());
 		}
 		
 		for(int j = 0; j < vertexPairs.length; j++) {
-			InVertex<V> to = new InVertex<V>(vertexPairs[j][0]);
-			InVertex<V> from = new InVertex<V>(vertexPairs[j][1]);
-			InEdge<E> edge = new InEdge<E>(to, from);
 			
-			System.out.println("edge:\t v1: " + to.getElement() + " v2: " + from.getElement());
+			InVertex<V> toVertex = null;
+			InVertex<V> fromVertex = null;
+			V to = vertexPairs[j][0];
+			V from = vertexPairs[j][1];
+			for(int k = 0; k < this.vertices.length; k++) {
+				if(to == this.vertices[k].getElement()) {
+					toVertex = this.vertices[k];
+				}
+				if(from == this.vertices[k].getElement()) {
+					fromVertex = this.vertices[k];
+				}
+			}
+			InEdge<E> edge = new InEdge<E>(toVertex, fromVertex);
+			
+			System.out.println("edge:\t v1: " + toVertex.getElement() + " " + toVertex.getIndex() + " v2: " + fromVertex.getElement() + " " + fromVertex.getIndex());
 			this.edges[j] = edge;
 		}
 		
