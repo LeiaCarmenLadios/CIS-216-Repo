@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
-public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
+public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 
 	
 	
-	private static class InVertex<V> implements Vertex<V>{
+	private class InVertex<V> implements Vertex<V>{
 		
 		private V element;
 		private int index;
@@ -74,10 +75,12 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 	
 	private void formMatrix() {
 		for(int i = 0; i < edges.length; i++) {
-			adjMat[edges[i].getToVertex().getIndex()]
-					[edges[i].getFromVertex().getIndex()] = 1;
-			adjMat[edges[i].getFromVertex().getIndex()]
-					[edges[i].getToVertex().getIndex()] = 1;
+			if(edges[i] != null) {
+				adjMat[edges[i].getToVertex().getIndex()]
+						[edges[i].getFromVertex().getIndex()] = 1;
+				adjMat[edges[i].getFromVertex().getIndex()]
+						[edges[i].getToVertex().getIndex()] = 1;
+			}
 		}
 	}
 	
@@ -91,7 +94,7 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		for(int i = 0; i < adjMat.length; i++) {
 			build += vertices[i].getElement() + "\t";
 			for(int j = 0; j < adjMat[0].length; j++) {
-				build += adjMat[i][j] + " ";
+				build += adjMat[i][j] + "  ";
 			}
 			build += "\n";
 		}
@@ -254,7 +257,6 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 				vertices[i].setIndex(i);
 				added = true;
 			}
-			System.out.println(vertices[i].getElement() + " " + vertices[i].getIndex());
 		}
 		
 		if(!added) {
@@ -269,24 +271,76 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 	public Edge<E> insertEdge(Vertex<V> vertOne, Vertex<V> vertTwo, E element) {
 		// TODO Auto-generated method stub
 		boolean added = false;
-		InVertex<V> vert1 = (AdjacencyMatrixGraph.InVertex<V>) vertOne;
-		InVertex<V> vert2 = (AdjacencyMatrixGraph.InVertex<V>) vertTwo;
+		InVertex<V> vert1 = (InVertex<V>) vertOne;
+		InVertex<V> vert2 = (InVertex<V>) vertTwo;
 		InEdge<E> newElement = new InEdge<E>(vert1, vert2, element);
+		
+		for(int j = 0; j < edges.length; j++) {
+			if(edges[j] == null) {
+				j++;
+			}
+			else {
+				if(edges[j].getToVertex().getElement() == vert1.getElement() &&
+				   edges[j].getFromVertex().getElement() == vert2.getElement()) {
+					return null;
+				}
+			}
+		}
 		
 		for(int i = 0; i < edges.length && !added; i++) {
 			if(edges[i] == null) {
 				edges[i] = newElement;
 				added = true;
+				System.out.println("TO: "  +  edges[i].getToVertex().getIndex() + " FROM: " + edges[i].getFromVertex().getIndex());
 			}
-			System.out.println(vertices[i].getElement() + " " + vertices[i].getIndex());
+			//System.out.println(edges[i].getElement() + " ");
 		}
 		
 		if(!added) {
 			System.out.println("It has not been added. There is no more "
 					+ "space to add this element.");
 		}
+	
 		
 		return newElement;
+	}
+	
+	public void buildMaze() {
+		Random generator = new Random();
+		for(int i = 0; i < vertices.length; i++) {
+			this.insertVertex((V) new Integer(generator.nextInt(100 + 1)));
+			System.out.println(vertices[i].getElement() + " " + vertices[i].getIndex());
+		}
+		
+		System.out.println(edges.length);
+		int randomEdges = generator.nextInt(edges.length/2) + adjMat.length;
+		System.out.println(randomEdges);
+		for(int j = 0; j < randomEdges ; j++) {
+			int to = generator.nextInt(vertices.length);
+			int from = generator.nextInt(vertices.length);
+			
+			while(to > from || to == from) {
+				if(to > from) {
+					//System.out.println(to + " " + from);
+					int temp = from;
+					from = to;
+					to = temp;
+					//System.out.println(to + " " + from + "\n\n");
+				}
+				if(to == from) {
+					to = generator.nextInt(vertices.length);
+				}
+			}
+			
+			
+			this.insertEdge(vertices[to], vertices[from], (E)new Integer(j));
+			
+			
+		}
+		
+		this.formMatrix();
+		System.out.println(this);
+	
 	}
 
 	@Override

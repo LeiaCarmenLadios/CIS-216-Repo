@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MazeGraphMain {
@@ -5,9 +6,10 @@ public class MazeGraphMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AdjacencyMatrixGraph<Integer, String> adjMat =
-				new AdjacencyMatrixGraph<Integer, String>(3);
-		adjMat.insertVertex(new Integer(4));
-		adjMat.insertVertex(new Integer(7));
+				new AdjacencyMatrixGraph<Integer, String>(5);
+		
+		
+		adjMat.buildMaze();
 //		Iterator it = adjMat.vertices().iterator();
 //		
 //		while(it.hasNext()) {
