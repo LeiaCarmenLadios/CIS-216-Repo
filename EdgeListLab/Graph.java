@@ -19,9 +19,9 @@ public interface Graph<V, E> {
 	
 	int inDegree(Vertex<V> vert);
 	
-	Iterable<E> outgoingEdges(Vertex<V> vert);
+	Iterable<Edge<E>> outgoingEdges(Vertex<V> vert);
 	
-	Iterable<E> incomingEdges(Vertex<V> vert);
+	Iterable<Edge<E>> incomingEdges(Vertex<V> vert);
 	
 //	Vertex<V> insertVertex(V element);
 //	
