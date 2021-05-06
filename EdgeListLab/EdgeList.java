@@ -1,23 +1,29 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Random;
 
 public class EdgeList<V, E> implements Graph<V, E>{
 
 	
 	
-	private static class InVertex<V> implements Vertex<V>{
+	public class InVertex<V> implements Vertex<V>{
 		
 		private V element;
 		private int index;
-		private int[] edgeList;
+		private ArrayList<InEdge<E>> edgeList;
 		
 		public InVertex(V element) {
 			this.element = element;
-			edgeList = new int[100];
+			edgeList = new ArrayList<InEdge<E>>(); //store corresponding edge elements 
 		}
 		
-		public int[] getVertexEdges() {
+		public ArrayList<InEdge<E>> getVertexEdges() {
 			return edgeList;
+		}
+		
+		public void addEdge(InEdge<E> edge) {
+			edgeList.add(edge);
 		}
 		
 		public int getIndex() {
@@ -35,7 +41,7 @@ public class EdgeList<V, E> implements Graph<V, E>{
 		
 	} //end of nested InVertex class
 	
-	private class InEdge<E> implements Edge<E>{
+	public class InEdge<E> implements Edge<E>{
 		private E element;
 		private InVertex<V> to;
 		private InVertex<V> from; 
@@ -44,7 +50,7 @@ public class EdgeList<V, E> implements Graph<V, E>{
 			this.element = element;
 		}
 		
-		public InEdge(InVertex<V> to, InVertex<V> from) {
+		public InEdge(InVertex<V> to, InVertex<V> from, E element) {
 			this.to = to;
 			this.from = from;
 		}
@@ -68,9 +74,42 @@ public class EdgeList<V, E> implements Graph<V, E>{
 	private ArrayList<InVertex<V>> vertices;
 	private ArrayList<InEdge<E>> edges;
 	
-	public EdgeList(int numVertices) {
-		vertices = new ArrayList();
-		edges = new ArrayList();
+	public EdgeList(ArrayList<V> v, ArrayList<V> e) {
+		
+		vertices = new ArrayList<InVertex<V>>();
+		edges = new ArrayList<InEdge<E>>();
+		
+		
+		for(int i = 0; i < v.size(); i++) {
+			InVertex<V> vert = new InVertex<V>(v.get(i));
+			this.vertices.add(vert);
+		}
+		
+		Random r = new Random();
+		Character c = (char)(r.nextInt(26) + 'a');
+		
+		for(int j = 0; j < e.size(); j += 2) {
+				InVertex<V> from = new InVertex<V>(e.get(j));
+				InVertex<V> to = new InVertex<V>(e.get(j + 1));
+				InEdge<E> edge = new InEdge<E>(to,from, (E) new Character(c));
+				this.edges.add(edge);
+			
+		}
+	
+		this.formEdgeList();
+		
+	}
+	
+	private void formEdgeList() {
+		
+		for(int i = 0; i < vertices.size(); i++) {
+			for(int j = 0; j < edges.size(); j++) {
+				if(vertices.get(i).getElement().equals(edges.get(j).getFromVertex().getElement()) 
+				 || vertices.get(i).getElement().equals(edges.get(j).getToVertex().getElement())) {
+					vertices.get(i).addEdge(edges.get(j));
+				}
+			}
+		}
 	}
 	
 	@Override
