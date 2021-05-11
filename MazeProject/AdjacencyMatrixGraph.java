@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
-public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
+public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 
 	
 	
-	private class InVertex<V> implements Vertex<V>{
+	private class InVertex<V> implements Vertex<V>, Comparable{
 		
 		private V element;
 		private int index;
@@ -27,6 +29,14 @@ public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 		public V getElement() {
 			// TODO Auto-generated method stub
 			return element;
+		}
+
+		@Override
+		public int compareTo(Object o) {
+			if(this.equals(o)) {
+				return 1;
+			}
+			return 0;
 		}
 		
 	} //end of nested InVertex class
@@ -221,11 +231,14 @@ public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 		// TODO Auto-generated method stub
 		
 		ArrayList<Edge<E>> outEdges = new ArrayList<Edge<E>>(); 
-		
-		for(int i = 0; i < edges.length; i++) {
-			if(edges[i].getToVertex().getElement().equals(vert.getElement()) ||
-				edges[i].getFromVertex().getElement().equals(vert.getElement())) {
-				outEdges.add(edges[i]);
+		System.out.println(edges.length);
+		for(int i = 0; i < adjMat.length; i++) {
+			if(edges[i].getToVertex() != null || edges[i].getFromVertex() != null) {
+				if(edges[i].getToVertex().getElement().equals(vert.getElement()) ||
+					edges[i].getFromVertex().getElement().equals(vert.getElement())) {
+					outEdges.add(edges[i]);
+					System.out.println(edges[i].getToVertex().getElement() + " " + edges[i].getFromVertex().getElement());
+				}
 			}
 		}
 		return outEdges;
@@ -291,9 +304,9 @@ public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 			if(edges[i] == null) {
 				edges[i] = newElement;
 				added = true;
-				System.out.println("TO: "  +  edges[i].getToVertex().getIndex() + " FROM: " + edges[i].getFromVertex().getIndex());
+			
 			}
-			//System.out.println(edges[i].getElement() + " ");
+			
 		}
 		
 		if(!added) {
@@ -309,12 +322,12 @@ public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 		Random generator = new Random();
 		for(int i = 0; i < vertices.length; i++) {
 			this.insertVertex((V) new Integer(generator.nextInt(100 + 1)));
-			System.out.println(vertices[i].getElement() + " " + vertices[i].getIndex());
+			
 		}
 		
-		System.out.println(edges.length);
+	
 		int randomEdges = generator.nextInt(edges.length/2) + adjMat.length;
-		System.out.println(randomEdges);
+		
 		for(int j = 0; j < randomEdges ; j++) {
 			int to = generator.nextInt(vertices.length);
 			int from = generator.nextInt(vertices.length);
@@ -339,21 +352,30 @@ public class AdjacencyMatrixGraph<V extends Integer, E> implements Graph<V, E>{
 		}
 		
 		this.formMatrix();
-		System.out.println(this);
 	
 	}
-
-	@Override
-	public void removeVerted(V vert) {
-		// TODO Auto-generated method stub
+	public <V, E> void DFT(Graph<V, E> graph) {
+		ArrayList<Vertex<V>> known = new ArrayList<Vertex<V>>();
+		Map<Vertex<V>, Edge<E>> forest = new TreeMap<Vertex<V>, Edge<E>>();
+		Vertex<V> start = (Vertex<V>) vertices[0];
+		DFTraversal(graph, start, known, forest);
+	}
+	private <V,E> void DFTraversal(Graph<V,E> graph, Vertex<V> start, 
+							 ArrayList<Vertex<V>> known, Map<Vertex<V>,
+							Edge<E>> forest) {
+		known.add(start);
 		
+		for(Edge<E> e: graph.outgoingEdges(start)) {
+			Vertex<V> vert = graph.opposite(start, e);
+			if(!known.contains(vert)) {
+				forest.put(vert, e);
+				DFTraversal(graph, vert, known, forest);
+			}
+		}
+
 	}
 
-	@Override
-	public void removeEdge(E edge) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 

@@ -27,8 +27,5 @@ public interface Graph<V, E> {
 	
 	Edge<E> insertEdge(Vertex<V> vertOne, Vertex<V> vertTwo, E element);
 	
-	void removeVerted(V vert);
-	
-	void removeEdge(E edge);
 	
 }

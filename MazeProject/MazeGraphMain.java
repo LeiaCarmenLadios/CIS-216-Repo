@@ -10,12 +10,9 @@ public class MazeGraphMain {
 		
 		
 		adjMat.buildMaze();
-//		Iterator it = adjMat.vertices().iterator();
-//		
-//		while(it.hasNext()) {
-//			System.out.println(it.next().toString() +" ");
-//		}
-//		
+		System.out.println(adjMat);
+		
+		adjMat.DFT(adjMat);
 	}
 
 }
