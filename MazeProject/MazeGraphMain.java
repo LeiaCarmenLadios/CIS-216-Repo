@@ -12,7 +12,8 @@ public class MazeGraphMain {
 		adjMat.buildMaze();
 		System.out.println(adjMat);
 		
-		adjMat.DFT(adjMat);
+		adjMat.DFTConstructPath(adjMat);
+		adjMat.printMaze();
 	}
 
 }

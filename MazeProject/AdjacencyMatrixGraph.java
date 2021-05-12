@@ -169,13 +169,15 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		// TODO Auto-generated method stub
 		
 		for(int i = 0; i < edges.length; i++) {
-			if(edges[i].equals(edge)) {
-				if(edges[i].getFromVertex().getElement()
-						.equals(vert.getElement())) {
-					return edges[i].getToVertex();
-				}
-				else {
-					return edges[i].getFromVertex();
+			if(edges[i]!= null) {
+				if(edges[i].equals(edge)) {
+					if(edges[i].getFromVertex().getElement()
+							.equals(vert.getElement())) {
+						return edges[i].getToVertex();
+					}
+					else {
+						return edges[i].getFromVertex();
+					}
 				}
 			}
 		}
@@ -231,13 +233,13 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		// TODO Auto-generated method stub
 		
 		ArrayList<Edge<E>> outEdges = new ArrayList<Edge<E>>(); 
-		System.out.println(edges.length);
+		
 		for(int i = 0; i < adjMat.length; i++) {
 			if(edges[i].getToVertex() != null || edges[i].getFromVertex() != null) {
 				if(edges[i].getToVertex().getElement().equals(vert.getElement()) ||
 					edges[i].getFromVertex().getElement().equals(vert.getElement())) {
 					outEdges.add(edges[i]);
-					System.out.println(edges[i].getToVertex().getElement() + " " + edges[i].getFromVertex().getElement());
+					
 				}
 			}
 		}
@@ -354,13 +356,18 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 		this.formMatrix();
 	
 	}
-	public <V, E> void DFT(Graph<V, E> graph) {
+	public <V, E> ArrayList<Edge<E>> DFTConstructPath(Graph<V, E> graph) {
 		ArrayList<Vertex<V>> known = new ArrayList<Vertex<V>>();
 		Map<Vertex<V>, Edge<E>> forest = new TreeMap<Vertex<V>, Edge<E>>();
 		Vertex<V> start = (Vertex<V>) vertices[0];
+		Vertex<V> end = (Vertex<V>) vertices[vertices.length - 1];
 		DFTraversal(graph, start, known, forest);
-	}
-	private <V,E> void DFTraversal(Graph<V,E> graph, Vertex<V> start, 
+		
+		ArrayList<Edge<E>> solutionPath = constructPath(graph, start, end, forest);
+		return solutionPath;
+	}  
+	
+	 private static <V,E> void DFTraversal(Graph<V,E> graph, Vertex<V> start, 
 							 ArrayList<Vertex<V>> known, Map<Vertex<V>,
 							Edge<E>> forest) {
 		known.add(start);
@@ -373,6 +380,32 @@ public class AdjacencyMatrixGraph<V, E> implements Graph<V, E>{
 			}
 		}
 
+	}
+	
+	private static <V,E> ArrayList<Edge<E>> constructPath(Graph<V,E> graph, Vertex<V> start, Vertex<V> end, Map<Vertex<V>, Edge<E>> forest){
+		
+		ArrayList<Edge<E>> path = new ArrayList<Edge<E>>();
+		if(forest.get(end) != null) {
+			Vertex<V> walk = end;
+			while(walk != start) {
+				Edge<E> edge = forest.get(walk);
+				path.add(0, edge);
+				walk = graph.opposite(walk, edge);
+			}
+		}
+		
+		return path;
+
+	}
+	
+	public void printMaze() {
+		
+		for(int i = 0; i < adjMat.length; i++) {
+			for(int j = 0; j < adjMat[0].length; j++) {
+				System.out.print("* ");
+			}
+			System.out.println();
+		}
 	}
 
 	
